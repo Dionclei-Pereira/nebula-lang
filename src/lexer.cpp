@@ -58,6 +58,7 @@ std::vector<Token> Lexer::tokenize() {
                 text += next();
             }
 
+            if (peek() == '"') next();
 
             tokens.push_back({
                 TokenType::String,
