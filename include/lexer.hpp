@@ -4,10 +4,11 @@
 
 enum class TokenType {
     Integer,
+    Float,
     String,
     Identifier,
 
-    Var,
+    Let,
     Print,
 
     Plus,
