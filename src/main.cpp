@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "lexer.hpp";
+#include "lexer.hpp"
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -21,5 +21,12 @@ int main(int argc, char* argv[]) {
 
     std::string code = buffer.str();
     std::cout << code;
+
+    Lexer lexer(code);
+    std::vector<Token> tokens = lexer.tokenize();
+    std::cout << "\n";
+    for (const Token& token : tokens) {
+        std::cout << static_cast<int>(token.type) << ": " << token.value << "\n" ;
+    }
     return 0;
 }
