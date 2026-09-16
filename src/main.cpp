@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 
+#include "lexer.hpp";
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cout << "Usage: nebula <file.nb>\n";
