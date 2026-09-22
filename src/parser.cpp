@@ -76,3 +76,46 @@ std::unique_ptr<Expr> Parser::term() {
 std::unique_ptr<Expr> Parser::expression() {
     return term();
 }
+
+std::unique_ptr<Statement> Parser::statement() {
+    if (match(TokenType::Let)) {
+        Token name = next();
+
+        if (name.type != TokenType::Identifier) {
+            throw std::runtime_error("Expected variable name");
+        }
+
+        if (!match(TokenType::Equal)) {
+            throw std::runtime_error("Expected '='");
+        }
+
+        auto value = expression();
+
+        return std::make_unique<LetStatement>(name.value, std::move(value));
+    }
+
+    if (match(TokenType::Print)) {
+        if (!(match(TokenType::LeftParen))) {
+            throw std::runtime_error("Expected '(' after print statement");
+        }
+
+        auto value = expression();
+
+        if (!(match(TokenType::RightParen))) {
+            throw std::runtime_error("Expected ')'");
+        }
+
+        return std::make_unique<PrintStatement>(std::move(value));
+    }
+
+    throw std::runtime_error("unknown command");
+}
+
+std::vector<std::unique_ptr<Statement>> Parser::parse() {
+    std::vector<std::unique_ptr<Statement>> program;
+    while (peek().type != TokenType::End) {
+        program.push_back(statement());
+    }
+
+    return program;
+}
