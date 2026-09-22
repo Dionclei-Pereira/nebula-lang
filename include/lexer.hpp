@@ -2,45 +2,49 @@
 #include <string>
 #include <vector>
 
+namespace nbl {
+
 enum class TokenType {
-    Integer,
-    Float,
-    String,
-    Identifier,
+  Integer,
+  Float,
+  String,
+  Identifier,
 
-    Let,
-    Print,
+  Let,
+  Print,
 
-    Plus,
-    Minus,
-    Star,
-    Slash,
+  Plus,
+  Minus,
+  Star,
+  Slash,
 
-    Equal,
+  Equal,
 
-    LeftParen,
-    RightParen,
+  LeftParen,
+  RightParen,
 
-    End
+  End
 };
 
 struct Token {
-    TokenType type;
-    std::string value;
+  TokenType type;
+  std::string value;
 };
 
 class Lexer {
-private:
-    std::string code;
-    size_t current = 0;
-    
-    char peek() const;
-    char next();
+ private:
+  std::string code;
+  size_t current = 0;
 
-    void skipWhiteSpace();
+  char peek() const;
+  char next();
 
-public:
-    Lexer(const std::string& code);
+  void skipWhiteSpace();
 
-    std::vector<Token> tokenize();
+ public:
+  Lexer(const std::string& code);
+
+  std::vector<Token> tokenize();
 };
+
+}  // namespace nbl
