@@ -1,4 +1,6 @@
-let x = 10
+@def PI 3.1415
+
+let x = PI
 let y = 20
 
 print(x)

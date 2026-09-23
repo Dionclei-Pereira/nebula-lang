@@ -4,6 +4,7 @@
 
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "preprocessor.hpp"
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -21,6 +22,8 @@ int main(int argc, char* argv[]) {
     buffer << file.rdbuf();
 
     std::string code = buffer.str();
+    nbl::Preprocessor pre(code);
+    code = pre.process();
     std::cout << code;
 
     nbl::Lexer lexer(code);
