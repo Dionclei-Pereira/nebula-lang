@@ -11,8 +11,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
 add_executable(nebula_lang
         include/lexer.hpp
         include/parser.hpp
+        include/preprocessor.hpp
         src/lexer.cpp
         src/main.cpp
+        src/preprocessor.cpp
 )
 
 set_target_properties(nebula_lang PROPERTIES OUTPUT_NAME "nebula")
